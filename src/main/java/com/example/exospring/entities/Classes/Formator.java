@@ -26,8 +26,8 @@ public class Formator extends Person implements IFormator {
 @JoinColumn(name = "subject_id")
 private List<Subject> subjects;
 
-@OneToMany(mappedBy="student_id")
-
+@OneToMany
+@JoinColumn(name = "student_id")
 private List<Student> students;
 
     public Formator() {

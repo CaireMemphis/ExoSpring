@@ -17,7 +17,9 @@ public class Student extends Person implements IStudent {
  @Temporal(TemporalType.DATE)
     private Date bornDate;
 
-
+@ManyToOne
+@JoinColumn(name = "formator_id")
+private Formator formator;
 
     public Student() {
     }
