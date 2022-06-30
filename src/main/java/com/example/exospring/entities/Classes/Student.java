@@ -7,43 +7,43 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
-@Entity
 
+
+@Entity
 @DiscriminatorValue("Student")
 public class Student extends Person implements IStudent {
 
 
- @Column(name = "bornDate",nullable = false)
- @Temporal(TemporalType.DATE)
-    private Date bornDate;
+     @Column(name = "bornDate",nullable = false)
+     @Temporal(TemporalType.DATE)
+        private Date bornDate;
 
-@ManyToOne
-@JoinColumn(name = "formator_id")
-private Formator formator;
+    @ManyToOne
+    private Formator formator;
 
-    public Student() {
-    }
+        public Student() {
+        }
 
-    public Student(Long id, String last_Name, String first_Name, String civility, String email, String adress, Date bornDate, Formator formator) {
-        super(id, last_Name, first_Name, civility, email, adress);
-        this.bornDate = bornDate;
+        public Student(Long id, String last_Name, String first_Name, String civility, String email, String adress, Date bornDate, Formator formator) {
+            super(id, last_Name, first_Name, civility, email, adress);
+            this.bornDate = bornDate;
 
-    }
+        }
 
-    public Date getBornDate() {
-        return bornDate;
-    }
+        public Date getBornDate() {
+            return bornDate;
+        }
 
-    public void setBornDate(Date bornDate) {
-        this.bornDate = bornDate;
-    }
+        public void setBornDate(Date bornDate) {
+            this.bornDate = bornDate;
+        }
 
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "bornDate=" + bornDate +
-                ", formator="  +
-                '}';
-    }
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "bornDate=" + bornDate +
+                    ", formator="  +
+                    '}';
+        }
 }

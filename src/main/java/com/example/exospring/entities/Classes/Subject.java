@@ -2,9 +2,11 @@ package com.example.exospring.entities.Classes;
 
 import com.example.exospring.entities.Interface.ISubject;
 import org.springframework.data.annotation.Id;
-
+import org.w3c.dom.stylesheets.LinkStyle;
 import javax.persistence.*;
-import java.sql.Time;
+import javax.validation.constraints.Size;
+import java.util.List;
+
 @Entity
 @Table(name = "Subject")
 public class Subject implements ISubject {
@@ -12,20 +14,26 @@ public class Subject implements ISubject {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 @Column(name = "name",nullable = false)
+@Size(max = 100)
     private String name;
 @Column(name = "time")
-    private Time time;
+    private int time;
 @Column(name = "difficulty")
+@Size(max = 50)
     private String difficulty;
+
+@ManyToMany(mappedBy = "subjects")
+private List<Formator> formators;
 
     public Subject() {
     }
 
-    public Subject(Long id, String name, Time time, String difficulty) {
+    public Subject(Long id, String name, int time, String difficulty, List<Formator> formators) {
         this.id = id;
         this.name = name;
         this.time = time;
         this.difficulty = difficulty;
+        this.formators = formators;
     }
 
     public Long getId() {
@@ -44,11 +52,11 @@ public class Subject implements ISubject {
         this.name = name;
     }
 
-    public Time getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
@@ -58,6 +66,14 @@ public class Subject implements ISubject {
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public List<Formator> getFormators() {
+        return formators;
+    }
+
+    public void setFormators(List<Formator> formators) {
+        this.formators = formators;
     }
 
     @Override

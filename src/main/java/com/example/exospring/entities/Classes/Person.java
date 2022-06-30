@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="personne")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type")
+@DiscriminatorColumn(name="role")
 public abstract class Person implements IPerson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,10 +1,9 @@
 package com.example.exospring.entities.Classes;
 
 import com.example.exospring.entities.Interface.IFormator;
-import org.hibernate.annotations.Table;
+
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.List;
 
@@ -22,13 +21,19 @@ public class Formator extends Person implements IFormator {
     private String status;
 
 
-@OneToMany
-@JoinColumn(name = "subject_id")
+@ManyToMany
+@JoinTable
+        (name = "skills",
+        joinColumns = @JoinColumn(name = "person_id"),
+        inverseJoinColumns = @JoinColumn(name = "subject_id")
+)
 private List<Subject> subjects;
 
 @OneToMany
-@JoinColumn(name = "student_id")
+@JoinColumn(name = "person_id")
 private List<Student> students;
+
+
 
     public Formator() {
     }
@@ -39,7 +44,21 @@ private List<Student> students;
         this.experience = experience;
         this.status = status;
     }
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
 
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
     public Date getHiredDate() {
         return hiredDate;
     }
